@@ -1,93 +1,64 @@
-import { useState,useEffect } from 'react'
+import { useEffect, useRef } from 'react';
+import { usePortfolio } from '../context/PortfolioContext';
 
 export default function Myinfo() {
+  const { infoTexts: texts, triggerInfo } = usePortfolio();
+  const sectionRef = useRef(null);
 
-    const [texts, setText] = useState([])
-    
-    const fullTexts = ["const", "myInformation", "=",
-        "{", "Name", ":", '"Korchat Piriyawongpaiboon"', ",", "Role", ":", '"Software Developer"', ",",
-             "Tech_stack", ":", '[/"JavaScript"/,/"Node.js"/,/"React"/,/"Express"/,/"mongodb"/]', "}"]; 
-       for(let i=0;i<fullTexts.length;i++){
-        texts.push("");
-    }   
-    
-
-
-
-
-
-    useEffect(  () => {
-
-        let index = 0;
-        let textIndex = 0;
-        const interval =  setInterval(() => {
-
-            let length = fullTexts[textIndex].length;
-           // console.log(index,textIndex,length);
-            if (index < length) {
-                setText(prevTexts => {
-                    const newTexts = [...prevTexts];
-                    newTexts[textIndex] = fullTexts[textIndex].slice(0, index + 1);
-                    return newTexts;
-                });
-                index++;
-            } else {
-                index = 0;
-                textIndex++;
-                if (textIndex >= fullTexts.length) {
-                    return  clearInterval(interval);
-                }
-            }
-            return () => clearTimeout(interval);
-            
-        }, 25);
-    }, []);
-
-    return (
-        <div className=" flex flex-col text-[2vw] bg-gray-700 text-green-400 w-[80vw] h-fit ml-[20vw] p-4">
-        <span className="flex flex-row justify-baseline font-bold gap-1">
-            <span className="text-red-400">{texts[0]}</span>
-            <span className="text-purple-400">{texts[1]}</span>
-            <span  className="text-white">{texts[2]}</span>
-        </span>
-      
-      <span className="flex flex-row justify-baseline gap-1"> 
-        <p className="text-pink-400">{texts[3]}</p> 
-        </span>
-        <span className="flex flex-row justify-baseline gap-1">
-
-        <p  className="text-white">{texts[4]}</p>
-        <p >{texts[5]}</p>
-        <p>{texts[6]}</p>
-        <p className="text-white">{texts[7]}</p>
-        </span>
-      
-      
-       <span className="flex flex-row justify-baseline gap-1">
-        <p className="text-white">{texts[8]}</p>
-        <p >{texts[9]}</p>
-        <p>{texts[10]}</p>
-        <p className="text-white">{texts[11]}</p>
-        </span>
-        <span className="flex flex-row justify-baseline gap-1">
-        <p className="text-white">{texts[12]}</p>
-        <p>{texts[13]}</p>
-        {texts[14].split('/').map((item, index) => {
-           
-           if(item === "["||item === "]"||item === ','){return <span key={index} className="text-white">{item}</span>}
-           else return <span key={index} className="text-green-400">{item}</span>
-        })}
-        </span>
-
-        <span className="flex flex-row justify-baseline gap-1">
-        <p  className="text-pink-400">{texts[15]} </p>
-        </span>
-        
-        </div>
-        
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          triggerInfo();
+        }
+      },
+      { threshold: 0.2 } // Trigger when 20% visible
     );
 
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
 
+    return () => observer.disconnect();
+  }, [triggerInfo]);
 
+  return (
+    <div ref={sectionRef} className="flex flex-col text-sm sm:text-lg md:text-xl lg:text-[2vw] bg-gray-700 text-green-400 w-full h-fit p-2 sm:p-4 font-mono">
+      {/* Line 1: const myInformation = { */}
+      <div className="flex gap-1 sm:gap-2 flex-wrap">
+        <span className="text-red-400">{texts[0]}</span>
+        <span className="text-purple-400">{texts[1]}</span>
+        <span className="text-white">{texts[2]}</span>
+        <span className="text-pink-400">{texts[3]}</span>
+      </div>
 
+      {/* Line 2: Name: "..." */}
+      <div className="flex gap-1 sm:gap-2 ml-4 sm:ml-8 flex-wrap">
+        <span className="text-white">{texts[4]}</span>
+        <span>{texts[5]}</span>
+        <span className="text-green-300 break-all">{texts[6]}</span>
+        <span className="text-white">{texts[7]}</span>
+      </div>
+
+      {/* Line 3: Role: "..." */}
+      <div className="flex gap-1 sm:gap-2 ml-4 sm:ml-8 flex-wrap">
+        <span className="text-white">{texts[8]}</span>
+        <span>{texts[9]}</span>
+        <span className="text-green-300 break-all">{texts[10]}</span>
+        <span className="text-white">{texts[11]}</span>
+      </div>
+
+      {/* Line 4: Tech_stack: [...] */}
+      <div className="flex gap-1 sm:gap-2 ml-4 sm:ml-8 flex-wrap">
+        <span className="text-white">{texts[12]}</span>
+        <span>{texts[13]}</span>
+        <span className="text-blue-300 break-all">{texts[14]}</span>
+      </div>
+
+      {/* Line 5: } */}
+      <div className="text-pink-400">
+        {texts[15]}
+      </div>
+    </div>
+  );
 }
