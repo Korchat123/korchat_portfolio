@@ -14,7 +14,11 @@ export default function MyProjects() {
           resetProjects();
         }
       },
+<<<<<<< HEAD
       { threshold: 0.001 }
+=======
+      { threshold: 0.1 }
+>>>>>>> f84da0678d83e3f67da7aa4c919dd3a7efef01c3
     );
 
     if (sectionRef.current) {
@@ -25,6 +29,7 @@ export default function MyProjects() {
   }, [triggerProjects, resetProjects]);
 
   return (
+<<<<<<< HEAD
     <div ref={sectionRef} className="flex flex-col">
       <h2 className="text-3xl font-bold text-green-400 mb-6 shrink-0">My Projects</h2>
       
@@ -39,6 +44,25 @@ export default function MyProjects() {
             <p className="text-gray-300 leading-relaxed">{project.description}</p>
           </div>
         ))}
+=======
+    <div ref={sectionRef} className="h-full flex flex-col">
+      <h2 className="text-3xl font-bold text-green-400 mb-6 shrink-0">My Projects</h2>
+      
+      {/* Scrollable container for projects */}
+      <div className="flex-1 overflow-y-auto pr-4 projects-container">
+        <div className="flex flex-col gap-6 pb-12">
+          {projects.map((project) => (
+            <div 
+              key={project.id} 
+              className="bg-gray-800/50 p-6 rounded-lg border border-gray-600 animate-in fade-in slide-in-from-left duration-500"
+            >
+              <h3 className="text-2xl font-bold text-green-400 mb-2">{project.label}:</h3>
+              <h4 className="text-xl font-semibold text-white mb-2">{project.title}</h4>
+              <p className="text-gray-300 leading-relaxed">{project.description}</p>
+            </div>
+          ))}
+        </div>
+>>>>>>> f84da0678d83e3f67da7aa4c919dd3a7efef01c3
       </div>
     </div>
   );
