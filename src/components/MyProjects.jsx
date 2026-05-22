@@ -38,7 +38,7 @@ export default function MyProjects() {
             >
               <h3 className="text-2xl font-bold text-green-400 mb-2">{project.label}:</h3>
               <h4 className="text-xl font-semibold text-white mb-2">{project.title}</h4>
-              <p className="text-gray-300 leading-relaxed">{project.description}</p>
+              <p className="text-gray-300 leading-relaxed wrap-break-words">{project.description}</p>
             </div>
           ))}
         </div>

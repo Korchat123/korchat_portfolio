@@ -29,18 +29,13 @@ export default function TechStack() {
   }, []);
 
   return (
-<<<<<<< HEAD
-    <div ref={sectionRef} className="flex flex-col">
-      <h2 className="text-3xl font-bold text-green-400 mb-6 shrink-0">Tech Stack</h2>
-      
-      <div className="pb-8 flex flex-col gap-10">
-=======
+
     <div ref={sectionRef} className="h-full flex flex-col overflow-hidden">
       <h2 className="text-3xl font-bold text-green-400 mb-6 shrink-0">Tech Stack</h2>
       
       {/* Scrollable container: Vertical for all screen sizes */}
       <div className="flex-1 overflow-y-auto pb-8 projects-container flex flex-col gap-10">
->>>>>>> f84da0678d83e3f67da7aa4c919dd3a7efef01c3
+        
         {TECH_STACK.map((category, idx) => (
           <div 
             key={category.category}
