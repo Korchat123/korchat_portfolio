@@ -19,7 +19,7 @@ export default function Education() {
                 <span className="text-green-300 font-mono text-sm sm:text-base shrink-0">{item.period}</span>
               </div>
               <p className="text-lg sm:text-xl text-blue-300 mb-2 leading-tight">{item.degree}</p>
-              <p className="text-gray-400 text-sm sm:text-base leading-relaxed">{item.description}</p>
+              <p className="text-gray-400 text-sm sm:text-base leading-relaxed wrap-break-words">{item.description}</p>
             </div>
           ))}
         </div>
