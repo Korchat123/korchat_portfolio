@@ -23,4 +23,24 @@
   .projects-container::-webkit-scrollbar-thumb {
     background: #10b981; /* green-500 */
   }
+
+  /* Hide scrollbar for projects while maintaining functionality */
+  .projects-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .projects-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  ...
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
 }
